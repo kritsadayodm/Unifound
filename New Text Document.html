@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unifound - Prototype (Updated)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .screen { display: none; }
+        .screen.active { display: flex; }
+    </style>
+</head>
+<body class="bg-gray-100 h-screen flex justify-center items-center font-sans">
+    
+    <div class="bg-white w-full max-w-md h-[800px] rounded-[2rem] shadow-2xl relative overflow-hidden flex flex-col border-[8px] border-gray-800">
+
+        <!-- หน้า 1: Login -->
+        <div id="login-screen" class="screen active p-8 flex-col justify-center h-full bg-blue-700 text-white relative">
+            <div class="absolute inset-0 bg-black opacity-10"></div>
+            <div class="relative z-10 text-center mb-10">
+                <h1 class="text-5xl font-bold tracking-tight mb-2">Unifound</h1>
+                <p class="text-blue-200">Campus Lost & Found Platform</p>
+            </div>
+            <div class="relative z-10 bg-white text-gray-800 p-6 rounded-2xl shadow-xl">
+                <h2 class="text-xl font-bold mb-5 text-gray-700">เข้าสู่ระบบ</h2>
+                <input type="text" placeholder="รหัสนักศึกษา (Student ID)" class="w-full mb-4 p-3 bg-gray-50 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition">
+                <input type="password" placeholder="รหัสผ่าน" class="w-full mb-6 p-3 bg-gray-50 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition">
+                <button onclick="navigate('dashboard-screen')" class="w-full bg-blue-600 text-white p-3 rounded-xl font-bold hover:bg-blue-700 active:scale-95 transition-all shadow-md">ล็อกอินเข้าสู่ระบบ</button>
+            </div>
+        </div>
+
+        <!-- หน้า 2: Dashboard (Feed) -->
+        <div id="dashboard-screen" class="screen flex-col h-full bg-gray-50 relative">
+            <div class="bg-blue-700 text-white p-5 flex justify-between items-center shadow-md z-10">
+                <h1 class="text-xl font-bold tracking-wide">Unifound</h1>
+                <button onclick="navigate('login-screen')" class="text-xs bg-blue-800 px-3 py-1.5 rounded-lg hover:bg-blue-900 transition">ออกจากระบบ</button>
+            </div>
+            
+            <div class="flex border-b bg-white">
+                <button class="flex-1 py-3 text-center border-b-2 border-blue-600 font-bold text-blue-600">รายการทั้งหมด</button>
+                <button class="flex-1 py-3 text-center text-gray-400 font-medium hover:text-gray-600">ของหาย</button>
+                <button class="flex-1 py-3 text-center text-gray-400 font-medium hover:text-gray-600">เก็บได้</button>
+            </div>
+
+            <div class="p-4 overflow-y-auto flex-1 pb-24">
+                <!-- Card 1: Normal Lost -->
+                <div onclick="navigate('detail-screen')" class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 mb-4 cursor-pointer hover:shadow-md hover:border-blue-200 transition">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="bg-red-50 text-red-600 text-xs px-2.5 py-1 rounded-md font-bold ring-1 ring-red-200">ตามหาของหาย</span>
+                        <span class="text-xs text-gray-400 font-medium">10 นาทีที่แล้ว</span>
+                    </div>
+                    <h3 class="font-bold text-gray-800 text-lg">iPad Pro สีเทา พร้อมเคสใส</h3>
+                    <p class="text-sm text-gray-500 mt-1.5 line-clamp-2">ลืมไว้ที่ห้องสมุด โซนชั้น 2 โต๊ะริมหน้าต่าง มีไฟล์งานโปรเจกต์สำคัญมาก</p>
+                </div>
+                
+                <!-- Card 2: Normal Found -->
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 mb-4 cursor-pointer hover:shadow-md hover:border-blue-200 transition">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="bg-green-50 text-green-600 text-xs px-2.5 py-1 rounded-md font-bold ring-1 ring-green-200">เก็บของได้</span>
+                        <span class="text-xs text-gray-400 font-medium">1 ชม. ที่แล้ว</span>
+                    </div>
+                    <h3 class="font-bold text-gray-800 text-lg">กุญแจรถห้อยพวงกุญแจดาบพิฆาตอสูร</h3>
+                    <p class="text-sm text-gray-500 mt-1.5 line-clamp-2">เจอบริเวณโรงอาหาร ส่งไว้ที่เคาน์เตอร์ประชาสัมพันธ์เรียบร้อยแล้ว</p>
+                </div>
+
+                <!-- Card 3: Item Lifespan Feature -->
+                <div class="bg-gray-100 p-4 rounded-2xl border border-gray-200 mb-4 opacity-75">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="bg-gray-300 text-gray-700 text-xs px-2.5 py-1 rounded-md font-bold flex items-center">
+                            <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                            ย้ายไปส่วนกลางแล้ว
+                        </span>
+                        <span class="text-xs text-red-500 font-bold">เกินกำหนด 15 วัน</span>
+                    </div>
+                    <h3 class="font-bold text-gray-500 text-lg line-through">กระเป๋าตังค์สีดำล้วน</h3>
+                    <p class="text-sm text-gray-500 mt-1.5">ไม่มีผู้มาติดต่อรับ ระบบได้แจ้งให้ผู้เก็บส่งมอบที่ห้องกิจการนักศึกษาเรียบร้อยแล้ว</p>
+                </div>
+            </div>
+
+            <!-- Floating Action Button -->
+            <button onclick="navigate('report-screen')" class="absolute bottom-8 right-6 bg-blue-600 text-white w-14 h-14 rounded-full shadow-lg text-3xl flex justify-center items-center hover:bg-blue-700 hover:scale-105 active:scale-95 transition-all">
+                +
+            </button>
+        </div>
+
+        <!-- หน้า 3: Detail Screen -->
+        <div id="detail-screen" class="screen flex-col h-full bg-white">
+            <div class="bg-white border-b p-4 flex items-center shadow-sm">
+                <button onclick="navigate('dashboard-screen')" class="mr-4 p-2 rounded-full hover:bg-gray-100 transition">
+                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                </button>
+                <h1 class="text-lg font-bold text-gray-800">รายละเอียด</h1>
+            </div>
+            <div class="p-6 flex-1 overflow-y-auto">
+                <span class="bg-red-50 text-red-600 text-xs px-2.5 py-1 rounded-md font-bold ring-1 ring-red-200">ตามหาของหาย</span>
+                <h2 class="text-2xl font-bold text-gray-800 mt-4 mb-4">iPad Pro สีเทา พร้อมเคสใส</h2>
+                
+                <div class="bg-gray-50 rounded-xl p-4 space-y-3 mb-6 border border-gray-100">
+                    <div class="flex items-start">
+                        <span class="text-gray-400 w-24 text-sm font-medium">สถานที่:</span>
+                        <span class="text-gray-800 text-sm font-medium flex-1">ห้องสมุด โซนชั้น 2</span>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="text-gray-400 w-24 text-sm font-medium">เวลา:</span>
+                        <span class="text-gray-800 text-sm font-medium flex-1">14:30 น. (โดยประมาณ)</span>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="text-gray-400 w-24 text-sm font-medium">ผู้แจ้ง:</span>
+                        <span class="text-blue-600 text-sm font-bold flex-1 flex items-center">
+                            163xxxxxxx (Verified)
+                            <svg class="w-4 h-4 ml-1 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                        </span>
+                    </div>
+                </div>
+                
+                <p class="text-gray-600 text-sm leading-relaxed">ถ้าใครพบเจอติดต่อกลับหน่อยนะครับ มีไฟล์งานโปรเจกต์สำคัญมาก ขอบคุณครับ</p>
+            </div>
+            <div class="p-5 bg-white border-t">
+                <button class="w-full bg-blue-600 text-white p-3.5 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-md">แชทติดต่อผู้แจ้ง</button>
+            </div>
+        </div>
+
+        <!-- หน้า 4: Report Form -->
+        <div id="report-screen" class="screen flex-col h-full bg-gray-50 relative">
+            <div class="bg-white border-b p-4 flex items-center shadow-sm">
+                <button onclick="navigate('dashboard-screen')" class="mr-4 p-2 rounded-full hover:bg-gray-100 transition">
+                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                </button>
+                <h1 class="text-lg font-bold text-gray-800">สร้างโพสต์ใหม่</h1>
+            </div>
+            <div class="p-6 overflow-y-auto flex-1">
+                <form onsubmit="event.preventDefault(); showSmartMatch();">
+                    <label class="block text-sm font-bold text-gray-700 mb-2">ประเภทการแจ้ง</label>
+                    <select class="w-full mb-5 p-3.5 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option>เก็บของได้ (Found)</option>
+                        <option>ตามหาของหาย (Lost)</option>
+                    </select>
+
+                    <label class="block text-sm font-bold text-gray-700 mb-2">ชื่อสิ่งของ</label>
+                    <input type="text" placeholder="ระบุชื่อสิ่งของให้ชัดเจน" value="iPad Pro" class="w-full mb-5 p-3.5 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+                    <label class="block text-sm font-bold text-gray-700 mb-2">สถานที่</label>
+                    <input type="text" placeholder="ตึก, ชั้น, หรือบริเวณจุดสังเกต" value="แถวห้องสมุด" class="w-full mb-5 p-3.5 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+                    <button type="submit" class="w-full bg-blue-600 text-white p-4 rounded-xl font-bold hover:bg-blue-700 active:scale-95 transition-all shadow-md mt-6">
+                        โพสต์ลงระบบ
+                    </button>
+                </form>
+            </div>
+
+            <!-- Smart Matching Modal -->
+            <div id="smart-match-modal" class="hidden absolute inset-0 bg-black/60 z-50 flex items-center justify-center p-6 backdrop-blur-sm">
+                <div class="bg-white rounded-3xl p-6 w-full shadow-2xl transform scale-100 transition-all">
+                    <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4 ring-8 ring-blue-50/50">
+                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-center text-gray-800 mb-2">Smart Matching พบข้อมูลตรงกัน!</h3>
+                    <p class="text-sm text-gray-500 text-center mb-5">ระบบพบ 1 รายการ "ของหาย" ที่มีคีย์เวิร์ดและสถานที่ใกล้เคียงกับของที่คุณเพิ่งเก็บได้</p>
+                    
+                    <div class="border border-blue-100 rounded-xl p-4 mb-6 bg-blue-50/50">
+                        <span class="bg-red-100 text-red-600 text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider mb-2 inline-block">ของหาย</span>
+                        <p class="font-bold text-gray-800 text-sm">iPad Pro สีเทา พร้อมเคสใส</p>
+                        <p class="text-xs text-gray-500 mt-1">ประกาศเมื่อ 10 นาทีที่แล้ว • ห้องสมุด โซนชั้น 2</p>
+                    </div>
+                    
+                    <div class="flex space-x-3">
+                        <button onclick="closeSmartMatch(false)" class="flex-1 py-3 rounded-xl border border-gray-200 font-bold text-gray-500 hover:bg-gray-50">ข้ามไปก่อน</button>
+                        <button onclick="closeSmartMatch(true)" class="flex-1 py-3 rounded-xl bg-blue-600 font-bold text-white shadow-md hover:bg-blue-700">ดูโพสต์ต้นทาง</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function navigate(screenId) {
+            document.querySelectorAll('.screen').forEach(el => el.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        function showSmartMatch() {
+            // จำลอง Audit Log ตอน Submit
+            console.log(`[Audit Log] User ID verified. Action: CREATE_POST_ATTEMPT, Timestamp: ${new Date().toISOString()}`);
+            document.getElementById('smart-match-modal').classList.remove('hidden');
+        }
+
+        function closeSmartMatch(goDetail) {
+            document.getElementById('smart-match-modal').classList.add('hidden');
+            if (goDetail) {
+                console.log(`[Audit Log] Action: SMART_MATCH_ACCEPTED, Timestamp: ${new Date().toISOString()}`);
+                navigate('detail-screen');
+            } else {
+                console.log(`[Audit Log] Action: SMART_MATCH_SKIPPED, Timestamp: ${new Date().toISOString()}`);
+                navigate('dashboard-screen');
+            }
+        }
+    </script>
+</body>
+</html>
